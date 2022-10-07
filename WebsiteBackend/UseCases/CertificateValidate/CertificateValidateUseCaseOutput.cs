@@ -1,9 +1,5 @@
-﻿using System;
-namespace WebsiteBackend.UseCases.CertificateValidate
+﻿namespace WebsiteBackend.UseCases.CertificateValidate;
+public class CertificateValidateUseCaseOutput
 {
-    public class CertificateValidateUseCaseOutput
-    {
-        public string Response { get; set; }
-    }
+    public bool IsValid => true;
 }
-

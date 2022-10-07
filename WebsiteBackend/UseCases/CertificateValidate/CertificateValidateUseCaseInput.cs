@@ -1,11 +1,5 @@
-﻿using System;
-namespace WebsiteBackend.UseCases.CertificateValidate
+﻿namespace WebsiteBackend.UseCases.CertificateValidate;
+public class CertificateValidateUseCaseInput
 {
-    public class CertificateValidateUseCaseInput
-    {
-        public CertificateValidateUseCaseInput()
-        {
-        }
-    }
+    public string CertificateId { get; set; }
 }
-
