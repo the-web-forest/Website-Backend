@@ -23,8 +23,6 @@ public class CertificateValidate
         ILogger log
     )
     {
-        log.LogInformation("C# HTTP trigger function processed a request.");
-
         string certificateId = req.Query["CertificateId"];
 
         var response = await _controller

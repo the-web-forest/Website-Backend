@@ -20,6 +20,13 @@ public class CertificateValidateUseCase : IUseCase<CertificateValidateUseCaseInp
         if (certificate is null)
             throw new InvalidCertificateIdException();
 
-        return new CertificateValidateUseCaseOutput();
+        return new CertificateValidateUseCaseOutput
+        {
+            Id = certificate.Id,
+            Name = certificate.Name,
+            CertificateUrl = certificate.File,
+            createtAt = certificate.CreatedAt,
+            updatedAt = certificate.UpdatedAt
+        };
     }
 }
