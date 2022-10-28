@@ -9,7 +9,7 @@ public static class Secrets
 {
     public static void Configure(IConfigurationRoot config)
     {
-        var VaultUri = config["Values:VAULT_URL"];
+        var VaultUri = Environment.GetEnvironmentVariable("VAULT_URL");
 
         if (VaultUri == null)
             return;
