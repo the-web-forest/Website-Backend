@@ -1,22 +1,23 @@
-﻿
-using Microsoft.Azure.Functions.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using WebsiteBackend.Controllers;
-using WebsiteBackend.UseCases;
-using WebsiteBackend.UseCases.CertificateValidate;
+﻿using Microsoft.Azure.Functions.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using WebsiteBackend.Configuration;
 
 [assembly: FunctionsStartup(typeof(WebsiteBackend.Startup))]
-
-namespace WebsiteBackend
+namespace WebsiteBackend;
+public class Startup : FunctionsStartup
 {
-    public class Startup : FunctionsStartup
+    public override void Configure(IFunctionsHostBuilder builder)
     {
-        public override void Configure(IFunctionsHostBuilder builder)
-        {
-            builder.Services.AddSingleton<IUseCase<CertificateValidateUseCaseInput, CertificateValidateUseCaseOutput>, CertificateValidateUseCase>();
+        var config = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("local.settings.json", optional: true, reloadOnChange: true)
+            .AddEnvironmentVariables()
+            .Build();
 
-            builder.Services.AddSingleton<CertificateValidateController>();
-        }
+        Secrets.Configure(config);
+        Databases.Configure(builder, config);
+        Repositories.Configure(builder);
+        UseCase.Configure(builder);
     }
 }
